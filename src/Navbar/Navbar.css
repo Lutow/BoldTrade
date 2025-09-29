@@ -1,0 +1,43 @@
+.navbar {
+    width: 100%;
+    max-height: 15%;
+    background-color: #000;
+    color: rebeccapurple;
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 1.5rem;
+}
+
+.navbar .navbar-logo {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: rebeccapurple;
+}
+
+    .navbar-logo a, .navbar-logo a:active, .navbar-logo a:visited, .navbar-logo a:focus, .navbar-logo a:visited {
+        color: rebeccapurple !important;
+        text-decoration: none !important;
+    }
+
+.navbar .navbar-nav {
+    padding: 0;
+    margin: 0;
+    gap: 4rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+
+
