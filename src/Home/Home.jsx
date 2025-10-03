@@ -7,8 +7,10 @@ const Home = () => {
         <div className="container">
             <Navbar />
             <div className="hero">
-                <h1 className="hero-title">Bold Trade</h1>
-                <h3 className="hero-subtitle">Stock Market</h3>
+                <p className="hero-title">BoldTrade</p>
+                <p className="hero-subtitle">Stock Market</p>
+                <p className="hero-subtitle2">The best trading platform provides 24/7 liquidity</p>
+                <button className="hero-btn">GET IN TOUCH</button>
             </div>
         </div>
     )
