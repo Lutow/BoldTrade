@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { usePortfolio } from '../hooks/useAuth.js';
+import { useNavigate } from 'react-router-dom';
 import './TradingActions.css';
 
 const TradingActions = ({ selectedCrypto }) => {
@@ -15,8 +16,9 @@ const TradingActions = ({ selectedCrypto }) => {
   const [exchangeTargetCrypto, setExchangeTargetCrypto] = useState('');
   const [targetCryptoPrice, setTargetCryptoPrice] = useState(0);
   
-  const { user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { balance, cryptos, addTransaction } = usePortfolio();
+  const navigate = useNavigate();
 
   // Liste des cryptos disponibles pour l'échange
   const availableCryptos = [
@@ -170,6 +172,11 @@ const TradingActions = ({ selectedCrypto }) => {
   }, [exchangeTargetCrypto]);
 
   const handleActionChange = (action) => {
+    // Vérifier si l'utilisateur est connecté
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
     setActiveAction(action);
   };
 
@@ -204,6 +211,12 @@ const TradingActions = ({ selectedCrypto }) => {
   };
 
   const handleTrade = () => {
+    // Vérifier si l'utilisateur est connecté avant toute action
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    
     setTradeError('');
     setTradeSuccess('');
     

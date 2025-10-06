@@ -35,11 +35,7 @@ function App() {
                 />
                 <Route 
                     path="/Exchange" 
-                    element={
-                        <ProtectedRoute>
-                            <Exchange />
-                        </ProtectedRoute>
-                    } 
+                    element={<Exchange />} 
                 />
             </Routes>
         </AuthProvider>
