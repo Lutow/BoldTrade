@@ -130,7 +130,7 @@ const TradingActions = ({ selectedCrypto }) => {
   const handleTrade = () => {
     const totalValue = totalUSD || (amount && currentPrice ? (parseFloat(amount) * currentPrice).toFixed(2) : '0');
     console.log(`${activeAction} ${amount} ${cryptoSymbol} for $${totalValue}`);
-    alert(`Action: ${activeAction.toUpperCase()}\nMontant: ${amount} ${cryptoSymbol}\nValeur: $${totalValue}`);
+    alert(`Action: ${activeAction.toUpperCase()}\nAmount: ${amount} ${cryptoSymbol}\nValue: $${totalValue}`);
   };
 
   const getActionColor = (action) => {
@@ -144,10 +144,10 @@ const TradingActions = ({ selectedCrypto }) => {
 
   const getActionLabel = (action) => {
     switch (action) {
-      case 'buy': return 'Acheter';
-      case 'sell': return 'Vendre';
-      case 'exchange': return 'Échanger';
-      default: return 'Acheter';
+      case 'buy': return 'Buy';
+      case 'sell': return 'Sell';
+      case 'exchange': return 'Exchange';
+      default: return 'Buy';
     }
   };
 
@@ -177,7 +177,7 @@ const TradingActions = ({ selectedCrypto }) => {
             borderColor: '#26a69a'
           }}
         >
-          📈 Acheter
+          Buy
         </button>
         <button
           className={`action-btn ${activeAction === 'sell' ? 'active' : ''}`}
@@ -187,7 +187,7 @@ const TradingActions = ({ selectedCrypto }) => {
             borderColor: '#ef5350'
           }}
         >
-          📉 Vendre
+          Sell
         </button>
         <button
           className={`action-btn ${activeAction === 'exchange' ? 'active' : ''}`}
@@ -197,7 +197,7 @@ const TradingActions = ({ selectedCrypto }) => {
             borderColor: '#665DCD'
           }}
         >
-          🔄 Échanger
+          Exchange
         </button>
       </div>
 
@@ -205,7 +205,7 @@ const TradingActions = ({ selectedCrypto }) => {
       <div className="trading-form">
         <div className="form-group">
           <label className="form-label">
-            Montant ({cryptoSymbol})
+            Amount ({cryptoSymbol})
           </label>
           <input
             type="number"
@@ -250,7 +250,7 @@ const TradingActions = ({ selectedCrypto }) => {
             }}
           >
             <span className="current-price">
-              Prix actuel: ${currentPrice.toLocaleString()}
+              Current price: ${currentPrice.toLocaleString()}
             </span>
           </div>
         )}
@@ -272,18 +272,18 @@ const TradingActions = ({ selectedCrypto }) => {
       {/* Informations supplémentaires */}
       <div className="trading-info">
         <div className="info-row">
-          <span className="info-label">Disponible:</span>
+          <span className="info-label">Available:</span>
           <span className="info-value">0.00 USD</span>
         </div>
         <div className="info-row">
-          <span className="info-label">Frais:</span>
+          <span className="info-label">Fees:</span>
           <span className="info-value">0.1%</span>
         </div>
       </div>
 
       {/* Actions rapides */}
       <div className="quick-actions">
-        <h4 className="quick-title">Actions rapides</h4>
+        <h4 className="quick-title">Quick actions</h4>
         <div className="quick-buttons">
           <button 
             className="quick-btn"

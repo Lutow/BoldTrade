@@ -11,28 +11,28 @@ const CryptoSelector = ({ onCryptoChange }) => {
       name: 'Bitcoin',
       symbol: 'BTC',
       logo: '₿',
-      description: 'La première et plus grande cryptomonnaie'
+      description: 'The first and largest cryptocurrency'
     },
     {
       id: 'ethereum',
       name: 'Ethereum',
       symbol: 'ETH',
       logo: 'Ξ',
-      description: 'Plateforme de contrats intelligents'
+      description: 'Smart contracts platform'
     },
     {
       id: 'binancecoin',
       name: 'BNB',
       symbol: 'BNB',
       logo: 'Ⓑ',
-      description: 'Token de l\'exchange Binance'
+      description: 'Binance exchange token'
     },
     {
       id: 'solana',
       name: 'Solana',
       symbol: 'SOL',
       logo: '◎',
-      description: 'Blockchain haute performance'
+      description: 'High-performance blockchain'
     }
   ];
 
@@ -88,9 +88,7 @@ const CryptoSelector = ({ onCryptoChange }) => {
                         {crypto.symbol}
                       </span>
                     </div>
-                    {selectedCrypto === crypto.id && (
-                      <span className="check-icon">✓</span>
-                    )}
+                    
                   </div>
                   <span className="exchange-description">
                     {crypto.description}
@@ -102,7 +100,7 @@ const CryptoSelector = ({ onCryptoChange }) => {
         )}
       </div>
 
-      {/* Overlay pour fermer le dropdown en cliquant à l'extérieur */}
+      {/* Overlay to close dropdown when clicking outside */}
       {isOpen && (
         <div 
           className="dropdown-overlay"
