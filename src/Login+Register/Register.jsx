@@ -1,8 +1,103 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext.jsx';
 import './Register.css';
 import Navbar from '../Navbar/Navbar.jsx';
 
 const Register = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+    const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const { register, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+
+    // Rediriger si déjà connecté
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/exchange');
+        }
+    }, [isAuthenticated, navigate]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        
+        // Effacer l'erreur du champ modifié
+        if (errors[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: ''
+            }));
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'L\'email est requis';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Format d\'email invalide';
+        }
+
+        if (!formData.password) {
+            newErrors.password = 'Le mot de passe est requis';
+        } else if (formData.password.length < 6) {
+            newErrors.password = 'Le mot de passe doit contenir au moins 6 caractères';
+        }
+
+        if (!formData.confirmPassword) {
+            newErrors.confirmPassword = 'La confirmation du mot de passe est requise';
+        } else if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPassword = 'Les mots de passe ne correspondent pas';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsLoading(true);
+        
+        try {
+            const result = await register(formData.email, formData.password, formData.confirmPassword);
+            
+            if (result.success) {
+                navigate('/exchange');
+            } else {
+                setErrors({ general: result.error });
+            }
+        } catch {
+            setErrors({ general: 'An error occurred during registration' });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+
     return (
         <>
             <Navbar />
@@ -14,7 +109,7 @@ const Register = () => {
 
                 {/* Social Login Section */}
                 <div className="social-login">
-                    <button className="google-btn">
+                    <button type="button" className="google-btn" disabled>
                         <div className="google-icon" aria-label="Google icon"></div>
                         <span className="login-now-text">Login now</span>
                     </button>
@@ -26,17 +121,38 @@ const Register = () => {
                 </div>
 
                 {/* Form Fields Section */}
-                <form className="form-fields">
+                <form className="form-fields" onSubmit={handleSubmit}>
+                    {errors.general && (
+                        <div className="error-message" style={{ 
+                            color: '#ef4444', 
+                            marginBottom: '16px', 
+                            padding: '12px', 
+                            border: '1px solid #ef4444', 
+                            borderRadius: '8px', 
+                            background: '#fef2f2' 
+                        }}>
+                            {errors.general}
+                        </div>
+                    )}
+
                     <div className="field-group">
                         <label className="field-label">
                             <span className="label-text">Email</span>
                         </label>
                         <input
                             type="email"
-                            className="input-field"
+                            name="email"
+                            className={`input-field ${errors.email ? 'error' : ''}`}
                             placeholder="Enter your email"
+                            value={formData.email}
+                            onChange={handleChange}
                             required
                         />
+                        {errors.email && (
+                            <span className="field-error" style={{ color: '#ef4444', fontSize: '14px' }}>
+                                {errors.email}
+                            </span>
+                        )}
                     </div>
 
                     <div className="field-group">
@@ -45,22 +161,80 @@ const Register = () => {
                         </div>
                         <div style={{ position: 'relative' }}>
                             <input
-                                type="password"
-                                className="input-field"
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                className={`input-field ${errors.password ? 'error' : ''}`}
                                 placeholder="Enter your password"
+                                value={formData.password}
+                                onChange={handleChange}
                                 required
                             />
                             <div
                                 className="eye-icon"
-                                style={{ position: 'absolute', right: '16px', top: '12px' }}
+                                style={{ 
+                                    position: 'absolute', 
+                                    right: '16px', 
+                                    top: '12px',
+                                    cursor: 'pointer',
+                                    fontSize: '18px'
+                                }}
+                                onClick={togglePasswordVisibility}
                                 aria-label="Toggle password visibility"
-                            ></div>
+                            >
+                                {showPassword ? '👁️' : '👁️‍🗨️'}
+                            </div>
                         </div>
+                        {errors.password && (
+                            <span className="field-error" style={{ color: '#ef4444', fontSize: '14px' }}>
+                                {errors.password}
+                            </span>
+                        )}
+                    </div>
+
+                    <div className="field-group">
+                        <div className="field-label">
+                            <span className="label-text">Confirm Password</span>
+                        </div>
+                        <div style={{ position: 'relative' }}>
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                name="confirmPassword"
+                                className={`input-field ${errors.confirmPassword ? 'error' : ''}`}
+                                placeholder="Confirm your password"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                                required
+                            />
+                            <div
+                                className="eye-icon"
+                                style={{ 
+                                    position: 'absolute', 
+                                    right: '16px', 
+                                    top: '12px',
+                                    cursor: 'pointer',
+                                    fontSize: '18px'
+                                }}
+                                onClick={toggleConfirmPasswordVisibility}
+                                aria-label="Toggle confirm password visibility"
+                            >
+                                {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                            </div>
+                        </div>
+                        {errors.confirmPassword && (
+                            <span className="field-error" style={{ color: '#ef4444', fontSize: '14px' }}>
+                                {errors.confirmPassword}
+                            </span>
+                        )}
                     </div>
 
                     {/* Submit Button */}
-                    <button type="submit" className="submit-btn">
-                        Create account
+                    <button 
+                        type="submit" 
+                        className="submit-btn"
+                        disabled={isLoading}
+                        style={{ opacity: isLoading ? 0.7 : 1 }}
+                    >
+                        {isLoading ? 'Création...' : 'Create account'}
                     </button>
                 </form>
 
@@ -68,7 +242,7 @@ const Register = () => {
                 <div className="footer">
                     <div className="footer-text">
                         <span className="footer-link">Already have an account?</span>
-                        <a href="#" className="login-link">Log in</a>
+                        <Link to="/login" className="login-link">Log in</Link>
                     </div>
                 </div>
             </div>
