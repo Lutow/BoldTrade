@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .container {
     display: flex;
@@ -168,6 +170,188 @@
     background: #564cb0;
 }
 
+
+/* --- Crypto Market Section --- */
+
+.crypto-market-making {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.crypto-market-title {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-family: 'Rubik', sans-serif;
+    margin-top: 6rem;
+}
+
+.crypto-market-paragraph {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin: 2rem auto 6rem;
+    max-width: 640px;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+.crypto-podium-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.crypto-podium-text {
+    flex: 1;
+    text-align: left;
+}
+
+.crypto-podium-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.crypto-podium-image img {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* --- Typo --- */
+.crypto-podium-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    max-width: 400px;
+}
+
+.crypto-podium-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.crypto-podium-paragraph {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 380px;
+}
+
+.crypto-charts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13rem;
+    max-width: 1400px;
+}
+
+.crypto-chart-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.crypto-chart-img img {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.crypto-charts-text {
+    transform: translateX(-4rem);
+}
+
+.crypto-charts-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+    max-width: 380px;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.crypto-charts-paragraph {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+/* --- Team section --- */
+
+.team-section-title {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-family: 'Rubik', sans-serif;
+    margin-top: 12rem;
+}
+
+.dev-team-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7rem;
+}
+
+.member-card {
+    margin-top: 2rem;
+    width: 18rem;
+    height: 20rem;
+    border-radius: 1.5rem;
+    background-color: #343434;
+}
+
+.member-card-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+
+.member-card-img img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.employee-name {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-family: 'Prompt', sans-serif;
+    font-weight: 600;
+    justify-content: center;
+    text-align: center;
+    margin-top: -1rem;
+}
+
+.employee-role {
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+.employee-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-top: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    max-width: 16rem;
+}
+
+
 /* --- Responsive Breakpoints --- */
 @media (max-width: 1024px) {
     .hero {
@@ -221,4 +405,153 @@
         font-size: 1.5rem;
     }
 }
+
+/* --- Responsive --- */
+@media (max-width: 1000px) {
+    .crypto-podium-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .crypto-podium-text {
+        text-align: center;
+    }
+
+    .crypto-podium-paragraph {
+        margin: 0 auto;
+    }
+
+    .crypto-podium-image img {
+        max-width: 380px;
+    }
+}
+
+/* --- Responsive for tablets & small screens --- */
+@media (max-width: 1200px) {
+    .crypto-charts {
+        gap: 6rem; /* slightly smaller gap on medium screens */
+        max-width: 1000px;
+    }
+
+    .crypto-charts-text {
+        transform: translateX(-2rem); /* less horizontal shift */
+    }
+}
+
+@media (max-width: 900px) {
+    .crypto-charts {
+        flex-direction: column; /* stack vertically */
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        text-align: center;
+        padding: 0 2rem;
+    }
+
+    .crypto-charts-text {
+        transform: none; /* reset transform */
+        max-width: 90%;
+    }
+
+    .crypto-charts-text h2,
+    .crypto-charts-subtitle,
+    .crypto-charts-paragraph {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .crypto-charts-img img {
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 600px) {
+    .crypto-charts {
+        gap: 2rem;
+    }
+
+    .crypto-charts-img img {
+        max-width: 300px;
+    }
+
+    .crypto-charts-subtitle {
+        font-size: 1rem;
+    }
+
+    .crypto-charts-paragraph {
+        font-size: 0.95rem;
+    }
+}
+
+/* --- Responsive adjustments for the team section --- */
+
+/* Medium screens: tablets and smaller laptops */
+@media (max-width: 1100px) {
+    .dev-team-container {
+        gap: 4rem; /* slightly reduce horizontal space */
+        flex-wrap: wrap; /* allow cards to wrap onto a new line */
+        justify-content: center;
+    }
+
+    .member-card {
+        width: 16rem;
+        height: 19rem;
+    }
+}
+
+/* Small screens: typical tablets / large phones */
+@media (max-width: 800px) {
+    .dev-team-container {
+        flex-direction: column; /* stack vertically */
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .member-card {
+        width: 90%;
+        max-width: 20rem;
+        height: auto; /* let height adapt to content */
+    }
+
+    .member-card-img img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .employee-name {
+        font-size: 1.1rem;
+    }
+
+    .employee-role {
+        font-size: 1rem;
+    }
+
+    .employee-description {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Extra small screens: phones in portrait */
+@media (max-width: 500px) {
+    .team-section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .dev-team-container {
+        gap: 2rem;
+    }
+
+    .member-card {
+        width: 95%;
+    }
+
+    .member-card-img img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
 
