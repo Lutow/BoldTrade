@@ -8,6 +8,27 @@
   max-width: 350px;
   font-family: 'Inter', sans-serif;
   backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+/* Responsive pour TradingActions */
+@media (max-width: 1024px) {
+  .trading-actions {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .trading-actions {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trading-actions {
+    padding: 12px;
+  }
 }
 
 /* Header */

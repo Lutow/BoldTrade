@@ -1,0 +1,119 @@
+.exchange-container {
+  padding: 20px 0;
+  height: calc(100vh - 80px); /* Hauteur totale moins la navbar */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.exchange-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  grid-template-areas: "selector chart trading";
+  gap: 20px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  height: 100%;
+  flex: 1;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.crypto-selector-section {
+  grid-area: selector;
+  height: fit-content;
+}
+
+.crypto-chart-section {
+  grid-area: chart;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.trading-actions-section {
+  grid-area: trading;
+  height: fit-content;
+}
+
+/* Très grands écrans - plus de 1400px */
+@media (min-width: 1400px) {
+  .exchange-layout {
+    grid-template-columns: 300px 1fr 350px;
+    padding: 0 40px;
+  }
+}
+
+/* Responsive Design */
+
+/* Tablettes - 768px à 1024px */
+@media (max-width: 1024px) {
+  .exchange-container {
+    height: auto;
+    min-height: calc(100vh - 80px);
+    padding: 15px 0;
+  }
+  
+  .exchange-layout {
+    grid-template-columns: 260px 1fr;
+    grid-template-areas: 
+      "selector chart"
+      "trading trading";
+    gap: 15px;
+    height: auto;
+    padding: 0 15px;
+  }
+  
+  .crypto-chart-section {
+    min-height: 400px;
+    height: auto;
+  }
+  
+  .trading-actions-section {
+    margin-top: 10px;
+  }
+}
+
+/* Mobile - moins de 768px */
+@media (max-width: 768px) {
+  .exchange-container {
+    padding: 10px 0;
+    height: auto;
+    min-height: calc(100vh - 80px);
+  }
+  
+  .exchange-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "selector"
+      "chart"
+      "trading";
+    gap: 15px;
+    height: auto;
+    padding: 0 10px;
+  }
+  
+  .crypto-selector-section,
+  .crypto-chart-section,
+  .trading-actions-section {
+    width: 100%;
+  }
+  
+  .crypto-chart-section {
+    min-height: 350px;
+    height: auto;
+  }
+}
+
+/* Très petits écrans - moins de 480px */
+@media (max-width: 480px) {
+  .exchange-container {
+    padding: 5px 0;
+  }
+  
+  .exchange-layout {
+    gap: 10px;
+    padding: 0 5px;
+  }
+}

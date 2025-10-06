@@ -148,30 +148,34 @@ const CryptoChart = ({ selectedCrypto }) => {
       <div className="crypto-chart-title">
         {cryptoName} ({cryptoSymbol}) - Price over 30 days
       </div>
-      <ResponsiveContainer width="100%" height="90%">
-        <ComposedChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-          <XAxis 
-            dataKey="date" 
-            stroke="#666"
-            fontSize={12}
-          />
-          <YAxis 
-            stroke="#666"
-            fontSize={12}
-            tickFormatter={(value) => `$${value.toLocaleString()}`}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Line 
-            type="monotone" 
-            dataKey="price" 
-            stroke="#26a69a" 
-            strokeWidth={2}
-            dot={false}
-            activeDot={{ r: 6, fill: '#26a69a' }}
-          />
-        </ComposedChart>
-      </ResponsiveContainer>
+      <div className="crypto-chart-responsive-container">
+        <ResponsiveContainer width="100%" height="100%">
+          <ComposedChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#34495e" />
+            <XAxis 
+              dataKey="date" 
+              stroke="#b0bec5"
+              fontSize={12}
+              tick={{ fill: '#b0bec5' }}
+            />
+            <YAxis 
+              stroke="#b0bec5"
+              fontSize={12}
+              tick={{ fill: '#b0bec5' }}
+              tickFormatter={(value) => `$${value.toLocaleString()}`}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Line 
+              type="monotone" 
+              dataKey="price" 
+              stroke="#26a69a" 
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ r: 6, fill: '#26a69a' }}
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
