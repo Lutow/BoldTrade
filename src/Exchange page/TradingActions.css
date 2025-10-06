@@ -1,0 +1,263 @@
+/* Trading Actions Styles */
+.trading-actions {
+  background: rgba(26, 27, 31, 0.9);
+  border: 2px solid #3F3F46;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 350px;
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(10px);
+}
+
+/* Header */
+.trading-header {
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 1px solid #3F3F46;
+  padding-bottom: 15px;
+}
+
+.trading-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.trading-subtitle {
+  color: #A0A0AB;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: 2px solid;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Trading Form */
+.trading-form {
+  margin-bottom: 20px;
+}
+
+/* Price Info */
+.price-info {
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: rgba(102, 93, 205, 0.1);
+  border-radius: 6px;
+}
+
+.current-price {
+  color: #665DCD;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  color: #D1D1D6;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(19, 19, 22, 0.8);
+  border: 1px solid #3F3F46;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #665DCD;
+  box-shadow: 0 0 0 3px rgba(102, 93, 205, 0.1);
+}
+
+.form-input::placeholder {
+  color: #70707B;
+}
+
+/* Total Section */
+.total-section {
+  background: rgba(102, 93, 205, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  color: #D1D1D6;
+  font-size: 14px;
+}
+
+.total-value {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Trade Button */
+.trade-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 16px;
+}
+
+.trade-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.trade-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Trading Info */
+.trading-info {
+  border-top: 1px solid #3F3F46;
+  padding-top: 16px;
+  margin-bottom: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.info-label {
+  color: #A0A0AB;
+  font-size: 13px;
+}
+
+.info-value {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Quick Actions */
+.quick-actions {
+  border-top: 1px solid #3F3F46;
+  padding-top: 16px;
+}
+
+.quick-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.quick-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.quick-btn {
+  flex: 1;
+  padding: 8px 4px;
+  background: rgba(102, 93, 205, 0.1);
+  border: 1px solid #665DCD;
+  border-radius: 6px;
+  color: #665DCD;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.quick-btn:hover {
+  background: rgba(102, 93, 205, 0.2);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .trading-actions {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trading-actions {
+    padding: 16px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .action-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .quick-buttons {
+    flex-direction: column;
+  }
+}
