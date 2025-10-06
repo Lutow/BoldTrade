@@ -10,9 +10,7 @@ const Register = () => {
     return (
         <>
             <Navbar />
-            <div style={{ height: '50000px', position: 'relative', overflow: 'hidden' }}>
-                <LaserFlowBoxExample />
-            </div>
+            <LaserFlowBoxExample />
         </>
     );
 }
@@ -47,22 +45,36 @@ function LaserFlowBoxExample() {
         }
       }}
     >
-      <LaserFlow
-        horizontalBeamOffset={0.1}
-        verticalBeamOffset={0.0}
-        color="#FF79C6"
-      />
+      <div style={{ position: 'absolute', top: '-30%', left: 0, right: 0, height: '100%', zIndex: 1 }}>
+        <LaserFlow
+          horizontalBeamOffset={0.2}
+          verticalBeamOffset={0.0}
+          color="#AE9EFF"
+          verticalSizing={5.0}
+          horizontalSizing={0.6}
+          wispDensity={5}
+          wispSpeed={14.5}
+          wispIntensity={12.6}
+          flowSpeed={0.95}
+          flowStrength={0.25}
+          fogIntensity={0.45}
+          fogScale={0.3}
+          fogFallSpeed={2}
+          decay={1.1}
+          falloffStart={0.89}
+        />
+      </div>
       
       <div style={{
         position: 'absolute',
-        top: '50%',
+        top: '20%',
         left: '50%',
         transform: 'translateX(-50%)',
         width: '86%',
         height: '60%',
         backgroundColor: '#060010',
         borderRadius: '20px',
-        border: '2px solid #FF79C6',
+        border: '2px solid #AE9EFF',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

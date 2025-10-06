@@ -264,24 +264,24 @@ void main(){
 export const LaserFlow: React.FC<Props> = ({
   className,
   style,
-  wispDensity = 1,
+  wispDensity = 5,
   dpr,
   mouseSmoothTime = 0.0,
   mouseTiltStrength = 0.01,
   horizontalBeamOffset = 0.1,
   verticalBeamOffset = 0.0,
-  flowSpeed = 0.35,
+  flowSpeed = 0.65,
   verticalSizing = 2.0,
   horizontalSizing = 0.5,
-  fogIntensity = 0.45,
+  fogIntensity = 0.20,
   fogScale = 0.3,
   wispSpeed = 15.0,
   wispIntensity = 5.0,
-  flowStrength = 0.25,
+  flowStrength = 0.15,
   decay = 1.1,
   falloffStart = 1.2,
   fogFallSpeed = 0.6,
-  color = '#FF79C6'
+  color = '#AE9EFF'
 }) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
