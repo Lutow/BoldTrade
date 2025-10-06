@@ -9,16 +9,15 @@ import {
   ResponsiveContainer,
   ReferenceLine 
 } from 'recharts';
+import './CryptoChart.css';
 
-// Mapping des IDs CoinGecko vers CoinRanking
+// Mapping des IDs CoinRanking 
 const COIN_RANKING_IDS = {
   'bitcoin': 'Qwsogvtv82FCd',
   'ethereum': 'razxDUgYGNAdQ',
   'binancecoin': 'WcwrkfNI4FUAe',
   'cardano': 'qzawljRxB5bYu',
   'solana': 'zNZHO_Sjf',
-  'polkadot': 'MKhxjUCOp',
-  'chainlink': 'ZlZpBOB4-',
   'avalanche-2': 'dvUj0CzDZ'
 };
 
@@ -40,10 +39,14 @@ const CryptoChart = ({ selectedCrypto }) => {
         
         // Récupération de la clé API depuis les variables d'environnement
         const API_KEY = import.meta.env.VITE_COIN_RANKING_API_KEY;
-        const coinId = COIN_RANKING_IDS[cryptoId] || 'Qwsogvtv82FCd'; // Bitcoin par défaut
+        const coinId = COIN_RANKING_IDS[cryptoId];
         
         if (!API_KEY) {
           throw new Error('Clé API CoinRanking manquante. Vérifiez votre fichier .env');
+        }
+        
+        if (!coinId) {
+          throw new Error(`Données de prix non disponibles pour ${cryptoName} (${cryptoSymbol}). Cette cryptomonnaie n'est pas encore supportée dans notre base de données.`);
         }
         
         // URL CoinRanking pour l'historique des prix (30 jours)
@@ -60,7 +63,15 @@ const CryptoChart = ({ selectedCrypto }) => {
         );
         
         if (!response.ok) {
-          throw new Error(`Erreur API CoinRanking: ${response.status}`);
+          if (response.status === 404) {
+            throw new Error(`Cryptomonnaie non trouvée sur CoinRanking pour ${cryptoName} (${cryptoSymbol})`);
+          } else if (response.status === 429) {
+            throw new Error(`Limite de requêtes atteinte. Veuillez attendre quelques minutes avant de réessayer.`);
+          } else if (response.status === 401) {
+            throw new Error(`Clé API invalide ou expirée. Vérifiez votre configuration.`);
+          } else {
+            throw new Error(`Erreur API CoinRanking: ${response.status} - ${response.statusText}`);
+          }
         }
         
         const result = await response.json();
@@ -94,21 +105,15 @@ const CryptoChart = ({ selectedCrypto }) => {
     };
 
     fetchData();
-  }, [cryptoId]);
+  }, [cryptoId, cryptoName, cryptoSymbol]);
 
   // Tooltip personnalisé
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          color: 'white',
-          padding: '10px',
-          borderRadius: '8px',
-          border: 'none'
-        }}>
-          <p style={{ margin: 0, fontWeight: 'bold' }}>{label}</p>
-          <p style={{ margin: '5px 0 0 0', color: '#26a69a' }}>
+        <div className="crypto-chart-tooltip">
+          <p>{label}</p>
+          <p className="price">
             Prix: ${payload[0].value.toLocaleString()}
           </p>
         </div>
@@ -119,16 +124,8 @@ const CryptoChart = ({ selectedCrypto }) => {
 
   if (error) {
     return (
-      <div style={{ 
-        height: '400px', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9'
-      }}>
-        <div style={{ textAlign: 'center', color: '#666' }}>
+      <div className="crypto-chart-state">
+        <div className="crypto-chart-error-content">
           <p>❌ Erreur de chargement</p>
           <p>{error}</p>
         </div>
@@ -138,17 +135,8 @@ const CryptoChart = ({ selectedCrypto }) => {
 
   if (isLoading) {
     return (
-      <div style={{
-        color: '#666', 
-        height: '400px', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9'
-      }}>
-        <div style={{ textAlign: 'center' }}>
+      <div className="crypto-chart-state crypto-chart-loading">
+        <div className="crypto-chart-loading-content">
           <p>Loading of {cryptoName}...</p>
         </div>
       </div>
@@ -156,15 +144,8 @@ const CryptoChart = ({ selectedCrypto }) => {
   }
 
   return (
-    <div style={{ 
-      width: '100%', 
-      height: '400px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      backgroundColor: 'white',
-      padding: '20px'
-    }}>
-      <div style={{ marginBottom: '10px', color: '#333', fontWeight: 'bold' }}>
+    <div className="crypto-chart-container">
+      <div className="crypto-chart-title">
         {cryptoName} ({cryptoSymbol}) - Price over 30 days
       </div>
       <ResponsiveContainer width="100%" height="90%">

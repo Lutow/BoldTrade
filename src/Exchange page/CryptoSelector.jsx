@@ -17,50 +17,22 @@ const CryptoSelector = ({ onCryptoChange }) => {
       id: 'ethereum',
       name: 'Ethereum',
       symbol: 'ETH',
-      logo: '🔷',
+      logo: 'Ξ',
       description: 'Plateforme de contrats intelligents'
     },
     {
       id: 'binancecoin',
       name: 'BNB',
       symbol: 'BNB',
-      logo: '�',
+      logo: 'Ⓑ',
       description: 'Token de l\'exchange Binance'
-    },
-    {
-      id: 'cardano',
-      name: 'Cardano',
-      symbol: 'ADA',
-      logo: '�',
-      description: 'Blockchain proof-of-stake'
     },
     {
       id: 'solana',
       name: 'Solana',
       symbol: 'SOL',
-      logo: '🌞',
+      logo: '◎',
       description: 'Blockchain haute performance'
-    },
-    {
-      id: 'polkadot',
-      name: 'Polkadot',
-      symbol: 'DOT',
-      logo: '⚪',
-      description: 'Protocole multi-chaînes'
-    },
-    {
-      id: 'chainlink',
-      name: 'Chainlink',
-      symbol: 'LINK',
-      logo: '🔗',
-      description: 'Réseau d\'oracles décentralisé'
-    },
-    {
-      id: 'avalanche-2',
-      name: 'Avalanche',
-      symbol: 'AVAX',
-      logo: '�',
-      description: 'Plateforme de DApps rapide'
     }
   ];
 

@@ -14,6 +14,36 @@ const TradingActions = ({ selectedCrypto }) => {
   const cryptoLogo = selectedCrypto?.logo || '₿';
   const cryptoId = selectedCrypto?.id || 'bitcoin';
 
+  const [isResetting, setIsResetting] = useState(false);
+  const [previousCryptoId, setPreviousCryptoId] = useState(cryptoId);
+
+  // Réinitialisation smooth des montants quand la crypto change
+  useEffect(() => {
+    if (cryptoId !== previousCryptoId) {
+      const hasValues = amount || totalUSD;
+      
+      if (hasValues) { // Seulement si il y a des valeurs à reset
+        setIsResetting(true);
+        
+        // Fade out avec delay
+        setTimeout(() => {
+          setAmount('');
+          setTotalUSD('');
+          setCurrentPrice(0);
+          
+          // Fade in après reset
+          setTimeout(() => {
+            setIsResetting(false);
+          }, 150);
+        }, 200);
+      } else {
+        setCurrentPrice(0);
+      }
+      
+      setPreviousCryptoId(cryptoId);
+    }
+  }, [cryptoId, previousCryptoId, amount, totalUSD]);
+
   // Récupération du prix actuel de la crypto
   useEffect(() => {
     const fetchCurrentPrice = async () => {
@@ -25,12 +55,16 @@ const TradingActions = ({ selectedCrypto }) => {
           'binancecoin': 'WcwrkfNI4FUAe',
           'cardano': 'qzawljRxB5bYu',
           'solana': 'zNZHO_Sjf',
-          'polkadot': 'MKhxjUCOp',
-          'chainlink': 'ZlZpBOB4-',
           'avalanche-2': 'dvUj0CzDZ'
         };
         
-        const coinId = coinRankingIds[cryptoId] || 'Qwsogvtv82FCd';
+        const coinId = coinRankingIds[cryptoId];
+        
+        if (!coinId) {
+          console.error('ID CoinRanking non trouvé pour:', cryptoId);
+          setCurrentPrice(0);
+          return;
+        }
         
         const response = await fetch(
           `https://api.coinranking.com/v2/coin/${coinId}`,
@@ -119,7 +153,14 @@ const TradingActions = ({ selectedCrypto }) => {
 
   return (
     <div className="trading-actions">
-      <div className="trading-header">
+      <div 
+        className="trading-header"
+        style={{
+          opacity: isResetting ? 0.6 : 1,
+          transform: isResetting ? 'scale(0.98)' : 'scale(1)',
+          transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out'
+        }}
+      >
         <h3 className="trading-title">
           {cryptoLogo} Trading {cryptoSymbol}
         </h3>
@@ -168,12 +209,16 @@ const TradingActions = ({ selectedCrypto }) => {
           </label>
           <input
             type="number"
-            className="form-input"
+            className={`form-input ${isResetting ? 'resetting' : ''}`}
             placeholder={`0.00 ${cryptoSymbol}`}
             value={amount}
             onChange={(e) => handleAmountChange(e.target.value)}
-            step="0.00000001"
+            step="0.1"
             min="0"
+            style={{
+              opacity: isResetting ? 0.3 : 1,
+              transition: 'opacity 0.3s ease-in-out'
+            }}
           />
         </div>
 
@@ -183,17 +228,27 @@ const TradingActions = ({ selectedCrypto }) => {
           </label>
           <input
             type="number"
-            className="form-input"
+            className={`form-input ${isResetting ? 'resetting' : ''}`}
             placeholder="0.00 USD"
             value={totalUSD}
             onChange={(e) => handleTotalUSDChange(e.target.value)}
             step="0.01"
             min="0"
+            style={{
+              opacity: isResetting ? 0.3 : 1,
+              transition: 'opacity 0.3s ease-in-out'
+            }}
           />
         </div>
         
         {currentPrice > 0 && (
-          <div className="price-info">
+          <div 
+            className="price-info"
+            style={{
+              opacity: isResetting ? 0.3 : 1,
+              transition: 'opacity 0.3s ease-in-out'
+            }}
+          >
             <span className="current-price">
               Prix actuel: ${currentPrice.toLocaleString()}
             </span>
@@ -204,7 +259,11 @@ const TradingActions = ({ selectedCrypto }) => {
           className="trade-button"
           onClick={handleTrade}
           disabled={!amount || !totalUSD}
-          style={{ backgroundColor: getActionColor(activeAction) }}
+          style={{ 
+            backgroundColor: getActionColor(activeAction),
+            opacity: isResetting ? 0.5 : 1,
+            transition: 'opacity 0.3s ease-in-out, background-color 0.3s ease'
+          }}
         >
           {getActionLabel(activeAction)} {amount || '0'} {cryptoSymbol}
         </button>
