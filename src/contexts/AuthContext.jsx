@@ -1,7 +1,8 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
 
+// Hook personnalisé pour utiliser le contexte
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
@@ -62,7 +63,8 @@ export const AuthProvider = ({ children }) => {
                 portfolio: {
                     balance: 10000, // Starting fictional balance
                     cryptos: {}
-                }
+                },
+                transactions: [] // Historique des transactions
             };
 
             // Sauvegarder l'utilisateur
@@ -70,7 +72,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('boldtrade_users', JSON.stringify(updatedUsers));
 
             // Connecter automatiquement l'utilisateur
-            const userSession = { id: newUser.id, email: newUser.email, portfolio: newUser.portfolio };
+            const userSession = { id: newUser.id, email: newUser.email, portfolio: newUser.portfolio, transactions: newUser.transactions };
             setUser(userSession);
             localStorage.setItem('boldtrade_user', JSON.stringify(userSession));
 
@@ -101,7 +103,8 @@ export const AuthProvider = ({ children }) => {
             const userSession = { 
                 id: foundUser.id, 
                 email: foundUser.email, 
-                portfolio: foundUser.portfolio 
+                portfolio: foundUser.portfolio,
+                transactions: foundUser.transactions || []
             };
             setUser(userSession);
             localStorage.setItem('boldtrade_user', JSON.stringify(userSession));
@@ -129,18 +132,68 @@ export const AuthProvider = ({ children }) => {
         // Mettre à jour aussi dans la liste des utilisateurs
         const existingUsers = JSON.parse(localStorage.getItem('boldtrade_users') || '[]');
         const updatedUsers = existingUsers.map(u => 
-            u.id === user.id ? { ...u, portfolio: newPortfolio } : u
+            u.id === user.id ? { ...u, portfolio: newPortfolio, transactions: user.transactions } : u
         );
         localStorage.setItem('boldtrade_users', JSON.stringify(updatedUsers));
     };
 
+    // Fonction pour ajouter une transaction à l'historique
+    const addTransaction = (transactionData) => {
+        if (!user) return;
+
+        const newTransaction = {
+            id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+            ...transactionData,
+            timestamp: new Date().toISOString(),
+            userId: user.id
+        };
+
+        const updatedTransactions = [newTransaction, ...(user.transactions || [])];
+        
+        // Créer l'utilisateur mis à jour avec les dernières données
+        const updatedUser = { 
+            ...user, 
+            transactions: updatedTransactions,
+            portfolio: user.portfolio // S'assurer que le portfolio est à jour
+        };
+        
+        // Mettre à jour l'état local
+        setUser(updatedUser);
+        localStorage.setItem('boldtrade_user', JSON.stringify(updatedUser));
+
+        // Mettre à jour dans la base des utilisateurs
+        const existingUsers = JSON.parse(localStorage.getItem('boldtrade_users') || '[]');
+        const updatedUsers = existingUsers.map(u => 
+            u.id === user.id ? { 
+                ...u, 
+                portfolio: updatedUser.portfolio, 
+                transactions: updatedTransactions 
+            } : u
+        );
+        localStorage.setItem('boldtrade_users', JSON.stringify(updatedUsers));
+
+        return newTransaction;
+    };
+
+    // Fonction de debug pour vérifier l'état de l'utilisateur
+    const debugUserData = () => {
+        console.log('Current user state:', user);
+        console.log('localStorage user:', JSON.parse(localStorage.getItem('boldtrade_user') || 'null'));
+        const users = JSON.parse(localStorage.getItem('boldtrade_users') || '[]');
+        const currentUserInDB = users.find(u => u.id === user?.id);
+        console.log('User in database:', currentUserInDB);
+    };
+
     const value = {
         user,
+        setUser,
         isLoading,
         login,
         register,
         logout,
         updatePortfolio,
+        addTransaction,
+        debugUserData,
         isAuthenticated: !!user
     };
 
@@ -150,3 +203,5 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
+export { AuthContext };
