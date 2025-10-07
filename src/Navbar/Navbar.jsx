@@ -20,7 +20,7 @@ const Navbar = () => {
             if (footer) {
                 const footerPosition = footer.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({ 
-                    top: footerPosition - 1200, // Scroll 200px before the footer
+                    top: footerPosition - 1200,
                     behavior: 'smooth' 
                 });
             }
@@ -32,7 +32,7 @@ const Navbar = () => {
                 if (footer) {
                     const footerPosition = footer.getBoundingClientRect().top + window.pageYOffset;
                     window.scrollTo({ 
-                        top: footerPosition - 1200, // Scroll 200px before the footer
+                        top: footerPosition - 1200,
                         behavior: 'smooth' 
                     });
                 }
@@ -49,7 +49,16 @@ const Navbar = () => {
                 <ul className="navbar-nav">
                     <li><Link to="/Exchange">Exchange</Link></li>
                     {isAuthenticated && <li><Link to="/dashboard">Dashboard</Link></li>}
-                    <li>Support</li>
+                    <li>
+                        <a 
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSeMuPbP4R1tQ2Mva_kiEKo82UA2uvOq_oHgfXMU85pod2rCIw/viewform?usp=dialog" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ cursor: 'pointer' }}
+                        >
+                            Support
+                        </a>
+                    </li>
                     <li><a onClick={scrollToFooter} style={{ cursor: 'pointer' }}>About Us</a></li>
                 </ul>
                 {isAuthenticated ? (
