@@ -351,6 +351,29 @@
     max-width: 16rem;
 }
 
+/* Are you ready section */
+
+.RUready-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 12rem;
+}
+
+.RUready-section-title {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-family: 'Rubik', sans-serif;
+}
+
+.RUready-bigger-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-family: 'Rubik', sans-serif;
+    justify-content: center;
+    text-align: center;
+}
+
 
 /* --- Responsive Breakpoints --- */
 @media (max-width: 1024px) {
@@ -554,4 +577,59 @@
     }
 }
 
+/* --- Responsive adjustments for RUready section --- */
+
+/* Medium screens: tablets and smaller laptops */
+@media (max-width: 1000px) {
+    .RUready-container {
+        gap: 1.5rem;
+        margin-top: 8rem;
+    }
+
+    .RUready-section-title {
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+    }
+
+    .RUready-bigger-title {
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        max-width: 600px;
+        text-align: center;
+        line-height: 1.3;
+    }
+}
+
+/* Small screens: tablets & large phones */
+@media (max-width: 700px) {
+    .RUready-container {
+        gap: 1.2rem;
+        margin-top: 6rem;
+    }
+
+    .RUready-section-title {
+        font-size: 1.6rem;
+    }
+
+    .RUready-bigger-title {
+        font-size: 2rem;
+        max-width: 90%;
+        line-height: 1.2;
+    }
+}
+
+/* Extra small screens: phones in portrait */
+@media (max-width: 480px) {
+    .RUready-container {
+        margin-top: 4rem;
+        gap: 1rem;
+    }
+
+    .RUready-section-title {
+        font-size: 1.4rem;
+    }
+
+    .RUready-bigger-title {
+        font-size: 1.75rem;
+        max-width: 95%;
+    }
+}
 

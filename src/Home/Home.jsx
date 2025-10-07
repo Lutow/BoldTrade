@@ -146,6 +146,11 @@ const Home = () => {
                     </p>
                 </div>
             </div>
+            <div className="RUready-container">
+                <h1 className="RUready-section-title">Are You Ready?</h1>
+                <h1 className="RUready-bigger-title">Be A Part Of The Next Big Thing</h1>
+                <button className="choose-btn">GET STARTED</button>
+            </div>
         </div>
     )
 }
