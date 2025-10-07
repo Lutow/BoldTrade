@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import CryptoChart from "./CryptoChart";
 import CryptoSelector from "./CryptoSelector";
 import TradingActions from "./TradingActions";
+import Footer from '../Footer/Footer.jsx';
 import "./Exchange.css";
 
 const Exchange = () => {
@@ -29,6 +30,7 @@ const Exchange = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
