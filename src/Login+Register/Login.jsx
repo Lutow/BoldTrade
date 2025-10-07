@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
-import './Register.css';
+import './Login.css';
 import Navbar from '../Navbar/Navbar.jsx';
 import LaserFlow from '../animations/LaserFlow.tsx';
 
@@ -166,9 +166,9 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, handle
         fontSize: '2rem',
         zIndex: 6
       }}>
-            <div className="form-container">
+            <div className="login-form-container">
                 {/* Title Section */}
-                <div className="title-section">
+                <div className="login-title-section">
                     <h1 className="title">Log in to your account</h1>
                 </div>
 

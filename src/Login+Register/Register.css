@@ -6,6 +6,7 @@
     align-items: center;
     padding: 48px 72px;
     gap: 30px;
+    height: 680px;
     max-width: 540px;
     background: rgba(10, 10, 20, 0.6);
     backdrop-filter: blur(20px);
@@ -60,6 +61,7 @@
     gap: 16px;
     width: 396px;
     height: 28px;
+    margin-top: -4rem;
 }
 
 .title {
@@ -212,6 +214,7 @@
     font-size: 16px;
     line-height: 100%;
     color: #FCFCFC;
+    margin-top: 1.75rem;
 }
 
 
@@ -231,8 +234,10 @@
     align-items: flex-start;
     padding: 0;
     gap: 8px;
-    width: 271px;
+    width: 471px;
     height: 16px;
+    transform: translateX(5.75rem);
+    margin-top: 1.5rem;
 }
 
 .footer-link {
@@ -253,4 +258,33 @@
     line-height: 100%;
     color: #A0A0AB;
     text-transform: capitalize;
+}
+
+@media (max-width: 1024px) {
+    .form-container {
+        padding: 40px 48px;
+        max-width: 460px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 32px 24px;
+        max-width: 90%;
+        gap: 20px;
+        border-radius: 16px;
+        box-shadow:
+                0 0 30px rgba(174, 158, 255, 0.3),
+                inset 0 0 20px rgba(174, 158, 255, 0.1);
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 24px 16px;
+        max-width: 95%;
+        border-radius: 14px;
+        gap: 16px;
+    }
 }

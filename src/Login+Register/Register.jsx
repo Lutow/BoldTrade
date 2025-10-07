@@ -32,7 +32,7 @@ const Register = () => {
             ...prev,
             [name]: value
         }));
-        
+
         // Effacer l'erreur du champ modifié
         if (errors[name]) {
             setErrors(prev => ({
@@ -69,16 +69,16 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!validateForm()) {
             return;
         }
 
         setIsLoading(true);
-        
+
         try {
             const result = await register(formData.email, formData.password, formData.confirmPassword);
-            
+
             if (result.success) {
                 navigate('/exchange');
             } else {
@@ -122,12 +122,13 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, showCo
   const revealImgRef = useRef(null);
 
   return (
-    <div 
-      style={{ 
-        height: '1200px', 
-        position: 'relative', 
+    <div
+      style={{
+        height: '1200px',
+        position: 'relative',
         overflow: 'hidden',
         backgroundColor: '#060010'
+
       }}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -164,7 +165,7 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, showCo
         decay={1.1}
         falloffStart={0.89}
       />
-      
+
       <div style={{
         position: 'absolute',
         top: '20%',
@@ -204,13 +205,13 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, showCo
                 {/* Form Fields Section */}
                 <form className="form-fields" onSubmit={handleSubmit}>
                     {errors.general && (
-                        <div className="error-message" style={{ 
-                            color: '#ef4444', 
-                            marginBottom: '16px', 
-                            padding: '12px', 
-                            border: '1px solid #ef4444', 
-                            borderRadius: '8px', 
-                            background: '#fef2f2' 
+                        <div className="error-message" style={{
+                            color: '#ef4444',
+                            marginBottom: '16px',
+                            padding: '12px',
+                            border: '1px solid #ef4444',
+                            borderRadius: '8px',
+                            background: '#fef2f2'
                         }}>
                             {errors.general}
                         </div>
@@ -252,9 +253,9 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, showCo
                             />
                             <div
                                 className="eye-icon"
-                                style={{ 
-                                    position: 'absolute', 
-                                    right: '16px', 
+                                style={{
+                                    position: 'absolute',
+                                    right: '16px',
                                     top: '12px',
                                     cursor: 'pointer',
                                     fontSize: '18px'
@@ -288,9 +289,9 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, showCo
                             />
                             <div
                                 className="eye-icon"
-                                style={{ 
-                                    position: 'absolute', 
-                                    right: '16px', 
+                                style={{
+                                    position: 'absolute',
+                                    right: '16px',
                                     top: '12px',
                                     cursor: 'pointer',
                                     fontSize: '18px'
@@ -309,8 +310,8 @@ function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, showCo
                     </div>
 
                     {/* Submit Button */}
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className="submit-btn"
                         disabled={isLoading}
                         style={{ opacity: isLoading ? 0.7 : 1 }}
