@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
-import './Login.css';
+import './Register.css';
 import Navbar from '../Navbar/Navbar.jsx';
+import LaserFlow from '../animations/LaserFlow.tsx';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -87,6 +88,84 @@ const Login = () => {
     return (
         <>
             <Navbar />
+            <LaserFlowBoxExample
+                formData={formData}
+                errors={errors}
+                isLoading={isLoading}
+                showPassword={showPassword}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                togglePasswordVisibility={togglePasswordVisibility}
+            />
+        </>
+    );
+};
+
+// Composant LaserFlow avec le formulaire
+function LaserFlowBoxExample({ formData, errors, isLoading, showPassword, handleChange, handleSubmit, togglePasswordVisibility }) {
+  const revealImgRef = useRef(null);
+
+  return (
+    <div 
+      style={{ 
+        height: '1200px', 
+        position: 'relative', 
+        overflow: 'hidden',
+        backgroundColor: '#060010'
+      }}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const el = revealImgRef.current;
+        if (el) {
+          el.style.setProperty('--mx', `${x}px`);
+          el.style.setProperty('--my', `${y + rect.height * 0.5}px`);
+        }
+      }}
+      onMouseLeave={() => {
+        const el = revealImgRef.current;
+        if (el) {
+          el.style.setProperty('--mx', '-9999px');
+          el.style.setProperty('--my', '-9999px');
+        }
+      }}
+    >
+      <LaserFlow
+        horizontalBeamOffset={0.2}
+        verticalBeamOffset={0.3}
+        color="#AE9EFF"
+        verticalSizing={5.0}
+        horizontalSizing={0.6}
+        wispDensity={5}
+        wispSpeed={14.5}
+        wispIntensity={12.6}
+        flowSpeed={0.95}
+        flowStrength={0.25}
+        fogIntensity={0.45}
+        fogScale={0.3}
+        fogFallSpeed={2}
+        decay={1.1}
+        falloffStart={0.89}
+      />
+      
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '86%',
+        height: '60%',
+        backgroundColor: '#060010',
+        borderRadius: '20px',
+        border: '2px solid #AE9EFF',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        fontSize: '2rem',
+        zIndex: 6
+      }}>
             <div className="form-container">
                 {/* Title Section */}
                 <div className="title-section">
@@ -195,10 +274,10 @@ const Login = () => {
                         <Link to="/register" className="login-link">Sign up</Link>
                     </div>
                 </div>
-
             </div>
-        </>
-    );
-};
+        </div>
+    </div>
+  );
+}
 
 export default Login;
