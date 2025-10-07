@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import './AddFunds.css';
+import Footer from '../Footer/Footer.jsx';
 
 const AddFunds = () => {
     const [selectedAmount, setSelectedAmount] = useState(null);
@@ -297,7 +298,9 @@ const AddFunds = () => {
                         </>
                     )}
                 </div>
+                
             </div>
+            <Footer />
         </>
     );
 };

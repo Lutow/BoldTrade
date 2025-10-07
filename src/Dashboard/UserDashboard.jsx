@@ -4,6 +4,7 @@ import { usePortfolio } from '../hooks/useAuth.js';
 import Navbar from '../Navbar/Navbar.jsx';
 import { User, Wallet, TrendingUp, TrendingDown, Activity, ArrowUpRight, ArrowDownLeft, BarChart3, LogOut } from 'lucide-react';
 import './UserDashboard.css';
+import Footer from '../Footer/Footer.jsx';
 
 const UserDashboard = () => {
     const { user, logout } = useAuth();
@@ -315,6 +316,7 @@ const UserDashboard = () => {
                         </button>
                     </div>
                 </div>
+                <Footer />
             </div>
         </>
     );
