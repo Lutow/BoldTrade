@@ -1,14 +1,43 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import './Navbar.css';
 import logo from '../assets/Logo.png';
 
 const Navbar = () => {
     const { user, logout, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         logout();
+    };
+
+    const scrollToFooter = () => {
+        // If we're already on home page, just scroll
+        if (location.pathname === '/') {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                const footerPosition = footer.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ 
+                    top: footerPosition - 1200, // Scroll 200px before the footer
+                    behavior: 'smooth' 
+                });
+            }
+        } else {
+            // Navigate to home first, then scroll
+            navigate('/');
+            setTimeout(() => {
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    const footerPosition = footer.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({ 
+                        top: footerPosition - 1200, // Scroll 200px before the footer
+                        behavior: 'smooth' 
+                    });
+                }
+            }, 100);
+        }
     };
 
     return(
@@ -21,7 +50,7 @@ const Navbar = () => {
                     <li><Link to="/Exchange">Exchange</Link></li>
                     {isAuthenticated && <li><Link to="/dashboard">Dashboard</Link></li>}
                     <li>Support</li>
-                    <li>About Us</li>
+                    <li><a onClick={scrollToFooter} style={{ cursor: 'pointer' }}>About Us</a></li>
                 </ul>
                 {isAuthenticated ? (
                     <ul className="navbar-LoginRegister">
