@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext.jsx';
 import './Register.css';
 import Navbar from '../Navbar/Navbar.jsx';
 import LaserFlow from '../animations/LaserFlow.tsx';
+import Footer from '../Footer/Footer.jsx';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -97,6 +98,7 @@ const Login = () => {
                 handleSubmit={handleSubmit}
                 togglePasswordVisibility={togglePasswordVisibility}
             />
+            <Footer />
         </>
     );
 };

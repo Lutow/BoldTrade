@@ -13,6 +13,9 @@
     box-sizing: border-box;
     margin-top: 12rem;
     position: relative; /* ensure it's in normal flow */
+    z-index: 100; /* Force it above other elements */
+    display: block; /* Force display */
+    min-height: 300px; /* Ensure it has height */
 }
 
 /* inner container */
