@@ -60,18 +60,40 @@ const UserDashboard = () => {
 
     // Calculate portfolio change based on transaction history
     useEffect(() => {
-        if (transactions.length > 0) {
-            // Simple calculation based on recent transactions
-            const recentValue = transactions.slice(0, 5).reduce((total, tx) => {
-                return total + (tx.type === 'buy' ? -tx.total : tx.total);
+        if (transactions.length > 0 && portfolioTotal > 0) {
+            // Calculate total invested (all buy transactions)
+            const totalInvested = transactions.reduce((total, tx) => {
+                if (tx.type === 'buy') {
+                    return total + tx.total;
+                }
+                return total;
             }, 0);
             
-            const percentage = portfolioTotal > 0 ? (recentValue / portfolioTotal) * 100 : 0;
-            setPortfolioChange({ value: recentValue, percentage: percentage });
+            // Calculate total gained from sales
+            const totalFromSales = transactions.reduce((total, tx) => {
+                if (tx.type === 'sell') {
+                    return total + tx.total;
+                }
+                return total;
+            }, 0);
+            
+            // Calculate current crypto holdings value
+            const cryptoValue = portfolioTotal - balance;
+            
+            // Net profit/loss = (current value + sales) - invested
+            const netChange = (cryptoValue + totalFromSales) - totalInvested;
+            
+            // Calculate percentage relative to amount invested
+            const percentage = totalInvested > 0 ? (netChange / totalInvested) * 100 : 0;
+            
+            setPortfolioChange({ 
+                value: netChange, 
+                percentage: Math.round(percentage * 100) / 100 // Round to 2 decimals
+            });
         } else {
             setPortfolioChange({ value: 0, percentage: 0 });
         }
-    }, [transactions, portfolioTotal]);
+    }, [transactions, portfolioTotal, balance]);
 
 
 
