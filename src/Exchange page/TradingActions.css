@@ -11,6 +11,116 @@
   box-sizing: border-box;
 }
 
+/* Messages de trading */
+.trade-message {
+  animation: slideIn 0.3s ease-out;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #ef4444 !important;
+}
+
+.success-message {
+  background: rgba(34, 197, 94, 0.1) !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
+  color: #22c55e !important;
+}
+
+/* Exchange section styles */
+.exchange-section {
+  padding: 16px 0;
+}
+
+.exchange-selector-container {
+  margin-bottom: 16px;
+}
+
+.exchange-label {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.crypto-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.crypto-select:focus {
+  outline: none;
+  border-color: #665DCD;
+  box-shadow: 0 0 0 1px #665DCD;
+}
+
+.crypto-select option {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 8px;
+}
+
+.exchange-info {
+  background: rgba(102, 93, 205, 0.1);
+  border: 1px solid rgba(102, 93, 205, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.exchange-rate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.exchange-rate span:last-child {
+  color: #665DCD;
+  font-weight: 600;
+}
+
+.exchange-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+}
+
+.receive-amount {
+  color: #22c55e !important;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 /* Responsive pour TradingActions */
 @media (max-width: 1024px) {
   .trading-actions {
